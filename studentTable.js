@@ -54,10 +54,6 @@ function myFunction(xml) {
     idAnnouncement.innerHTML = "There are " + idAnnouncementText
     document.body.append(idAnnouncement)
 
-    const demoTable = document.createElement("table")
-    demoTable.id = "demo"
-    document.body.append(demoTable)
-    document.getElementById("demo").innerHTML = header + rows
 
     function getBars(idObject) {
         console.log(idObject);
@@ -67,11 +63,10 @@ function myFunction(xml) {
         for (let i = 0; i < letters.length; i++) {
             let y = i * 20 + 10
             let upperLetter = letters[i]
-            // if (idObject[upperLetter]) {
 
                 let cusNumForEachId = idObject[upperLetter] ? idObject[upperLetter] : 0
-                let xValForText = idObject[upperLetter] ? idObject[upperLetter] * 10 - 3 : 20
-                let rectWidth = idObject[upperLetter] ? idObject[upperLetter] * 10 : 1
+                let xValForText = idObject[upperLetter] ? idObject[upperLetter] * 30 - 3 : 20
+                let rectWidth = idObject[upperLetter] ? idObject[upperLetter] * 30 : 1
 
                 cusId += `<g transform= translate(50,${y})>
                        <text x="0" y="9.5" dy=".35em"> ${upperLetter}ID</text>
@@ -85,7 +80,12 @@ function myFunction(xml) {
 
     const svgTag = document.createElement("div")
     svgTag.innerHTML = `<svg>${getBars(allIdCount)}</svg>`
-    console.log(svgTag);
-
     document.body.append(svgTag)
+
+
+
+    const demoTable = document.createElement("table")
+    demoTable.id = "demo"
+    document.body.append(demoTable)
+    document.getElementById("demo").innerHTML = header + rows
 }
