@@ -67,23 +67,18 @@ function myFunction(xml) {
         for (let i = 0; i < letters.length; i++) {
             let y = i * 20 + 10
             let upperLetter = letters[i]
-            if (idObject[upperLetter]) {
+            // if (idObject[upperLetter]) {
 
                 let cusNumForEachId = idObject[upperLetter] ? idObject[upperLetter] : 0
+                let xValForText = idObject[upperLetter] ? idObject[upperLetter] * 10 - 3 : 20
+                let rectWidth = idObject[upperLetter] ? idObject[upperLetter] * 10 : 1
 
                 cusId += `<g transform= translate(50,${y})>
                        <text x="0" y="9.5" dy=".35em"> ${upperLetter}ID</text>
-                       <rect width=${cusNumForEachId * 10} height="19"></rect>
-                       <text x="${cusNumForEachId * 10 - 3}" y="9.5" dy=".35em">${cusNumForEachId}</text>
+                       <rect width=${rectWidth} height="19"></rect>
+                       <text x="${xValForText}" y="9.5" dy=".35em">${cusNumForEachId}</text>
                    </g>`
-            } else {
-                // console.log(upperLetter);
-                cusId += `<g transform= translate(50,${y})>
-                           <text x="0" y="9.5" dy=".35em"> ${upperLetter}ID</text>
-                           <rect width="1" height="19"></rect>
-                           <text x="20" y="9.5" dy=".35em">0</text>
-                       </g>`
-            }
+
         }
         return cusId
     }
@@ -91,28 +86,6 @@ function myFunction(xml) {
     const svgTag = document.createElement("div")
     svgTag.innerHTML = `<svg>${getBars(allIdCount)}</svg>`
     console.log(svgTag);
-    // svgTag.innerHTML = "<svg>\n" +
-    //     "    <g transform=\"translate(50,10)\">\n" +
-    //     "        <text x=\"0\" y=\"9.5\" dy=\".35em\">AID</text>\n" +
-    //     "        <rect width=\"50\" height=\"19\"></rect>\n" +
-    //     "        <text x=\"47\" y=\"9.5\" dy=\".35em\">5</text>\n" +
-    //     "    </g>\n" +
-    //     "    <g transform=\"translate(50,30)\">\n" +
-    //     "        <text x=\"0\" y=\"9.5\" dy=\".35em\">AID</text>\n" +
-    //     "        <rect width=\"1\" height=\"19\"></rect>\n" +
-    //     "        <text x=\"20\" y=\"9.5\" dy=\".35em\">10</text>\n" +
-    //     "    </g>\n" +
-    //     "    <g transform=\"translate(50,50)\">\n" +
-    //     "        <text x=\"0\" y=\"9.5\" dy=\".35em\">AID</text>\n" +
-    //     "        <rect width=\"120\" height=\"19\"></rect>\n" +
-    //     "        <text x=\"117\" y=\"9.5\" dy=\".35em\">12</text>\n" +
-    //     "    </g>\n" +
-    //     "\n" +
-    //     "    <g transform=\"translate(50,70)\">\n" +
-    //     "        <text x=\"0\" y=\"9.5\" dy=\".35em\">AID</text>\n" +
-    //     "        <rect width=\"120\" height=\"19\"></rect>\n" +
-    //     "        <text x=\"117\" y=\"9.5\" dy=\".35em\">12</text>\n" +
-    //     "    </g>\n" +
-    //     "</svg>\n"
+
     document.body.append(svgTag)
 }
