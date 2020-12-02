@@ -12,7 +12,7 @@ function loadDoc() {
 
 function myFunction(xml) {
     const xmlDoc = xml.responseXML;
-    let header = "<tr><th>Cust ID</th><th> First Name </th><th> Last Name </th><th> Gender </th><th> City </th><th> State </th></tr>"
+    const header = "<tr><th>Cust ID</th><th> First Name </th><th> Last Name </th><th> Gender </th><th> City </th><th> State </th></tr>"
     const customersOut = xmlDoc.getElementsByTagName("customersOutXml")
     const columns = ["CustID", "FirstName", "LastName", "gender", "City", "State"]
 
@@ -47,7 +47,7 @@ function myFunction(xml) {
     // "OH: 66 MI: 1"
     const idAnnouncement = document.createElement("h2")
 
-    let idAnnouncementText = Object.entries(allIdCount).map(([idLetter, number]) => {
+    const idAnnouncementText = Object.entries(allIdCount).map(([idLetter, number]) => {
         return `${number} ${idLetter}ID | `
     }).join(" ")
 
@@ -56,33 +56,27 @@ function myFunction(xml) {
 
 
     function getBars(idObject) {
-        console.log(idObject);
         const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("")
-        let cusId = ""
 
-        for (let i = 0; i < letters.length; i++) {
-            let y = i * 20 + 10
-            let upperLetter = letters[i]
+        return letters.map((upperLetter, i) => {
+            const y = i * 20 + 10
 
-                let cusNumForEachId = idObject[upperLetter] ? idObject[upperLetter] : 0
-                let xValForText = idObject[upperLetter] ? idObject[upperLetter] * 30 - 3 : 20
-                let rectWidth = idObject[upperLetter] ? idObject[upperLetter] * 30 : 1
+            const cusNumForEachId = idObject[upperLetter] ? idObject[upperLetter] : 0
+            const xValForText = idObject[upperLetter] ? idObject[upperLetter] * 30 - 3 : 20
+            const rectWidth = idObject[upperLetter] ? idObject[upperLetter] * 30 : 1
 
-                cusId += `<g transform= translate(50,${y})>
-                       <text x="0" y="9.5" dy=".35em"> ${upperLetter}ID</text>
-                       <rect width=${rectWidth} height="19"></rect>
-                       <text x="${xValForText}" y="9.5" dy=".35em">${cusNumForEachId}</text>
-                   </g>`
+            return `<g transform= translate(50,${y})>
+                   <text x="0" y="9.5" dy=".35em"> ${upperLetter}ID</text>
+                   <rect width=${rectWidth} height="19"></rect>
+                   <text x="${xValForText}" y="9.5" dy=".35em">${cusNumForEachId}</text>
+               </g>`
 
-        }
-        return cusId
+        }).join("")
     }
 
     const svgTag = document.createElement("div")
     svgTag.innerHTML = `<svg>${getBars(allIdCount)}</svg>`
     document.body.append(svgTag)
-
-
 
     const demoTable = document.createElement("table")
     demoTable.id = "demo"
